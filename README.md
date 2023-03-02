@@ -57,9 +57,13 @@
 
 <img width="437" alt="스크린샷 2023-03-02 오후 9 03 04" src="https://user-images.githubusercontent.com/83000829/222423518-a5b887bb-1e0c-4fb7-b478-df3c1dbf7e9f.png">
 
+🚧 구매 정보 관련 테이블 추가 예정
+
 ### Entity
 
 <img width="437" alt="스크린샷 2023-03-02 오후 9 03 17" src="https://user-images.githubusercontent.com/83000829/222423587-3db341df-3dea-4153-88ae-cff7fca74926.png">
+
+🚧 구매 정보 관련 엔티티 추가 예정
 
 ## API 스펙
 
@@ -80,8 +84,8 @@
 
 ## 트러블 슈팅
 
-🛠 업데이트 예정
+🚧 업데이트 예정
 
 ## 배포 해보기
 
-🛠 업데이트 예정
+🚧 업데이트 예정
