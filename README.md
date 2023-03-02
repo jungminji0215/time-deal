@@ -25,11 +25,11 @@
 
 ## 프로젝트 설명
 
+11번가가 제공하는 '쇼킹딜' 서비스는 특정 상품에 대해서 특정 시간 동안만 특가 가격으로 상품을 구매할 수 있는 서비스이다. 이와 같은 타임딜 REST API 서버를 구축해 보려고 한다.
+
 ### 예시
 
 [11번가 쇼킹딜 서비스](https://deal.11st.co.kr/browsing/DealAction.tmall?method=getTimeDeal)
-
-11번가가 제공하는 '쇼킹딜' 서비스는 특정 상품에 대해서 특정 시간 동안만 특가 가격으로 상품을 구매할 수 있는 서비스이다. 이와 같은 타임딜 REST API 서버를 구축해 보려고 한다.
 
 ### 기능
 
@@ -51,12 +51,15 @@
 - 상품을 구매한 사람 수와 상품의 재고수량이 일치해야 한다.
 - 구매하기 API는 구매 성공/실패만 구분해도 된다.
 
-
 ## 설계
 
 ### ERD
 
+<img width="437" alt="스크린샷 2023-03-02 오후 9 03 04" src="https://user-images.githubusercontent.com/83000829/222423518-a5b887bb-1e0c-4fb7-b478-df3c1dbf7e9f.png">
+
 ### Entity
+
+<img width="437" alt="스크린샷 2023-03-02 오후 9 03 17" src="https://user-images.githubusercontent.com/83000829/222423587-3db341df-3dea-4153-88ae-cff7fca74926.png">
 
 ## API 스펙
 
