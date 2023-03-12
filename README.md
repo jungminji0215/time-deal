@@ -55,15 +55,15 @@
 
 ### ERD
 
-<img width="437" alt="스크린샷 2023-03-02 오후 9 03 04" src="https://user-images.githubusercontent.com/83000829/222423518-a5b887bb-1e0c-4fb7-b478-df3c1dbf7e9f.png">
+<img width="721" alt="스크린샷 2023-03-12 오후 1 27 16" src="https://user-images.githubusercontent.com/83000829/224524325-cdc34635-0a83-43f3-8abb-394c129a12b6.png">
 
-🚧 구매 정보 관련 테이블 추가 예정
+🚧 재고정보, 시간정보 테이블 설계 고민중
 
 ### Entity
 
 <img width="437" alt="스크린샷 2023-03-02 오후 9 03 17" src="https://user-images.githubusercontent.com/83000829/222423587-3db341df-3dea-4153-88ae-cff7fca74926.png">
 
-🚧 구매 정보 관련 엔티티 추가 예정
+🚧 order 엔티티 추가 예정
 
 ## API
 
