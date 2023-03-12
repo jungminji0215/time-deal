@@ -4,7 +4,7 @@ package com.example.timedeal.controller;
 import com.example.timedeal.dto.product.request.ProductCreateRequest;
 import com.example.timedeal.dto.product.request.ProductUpdateRequest;
 import com.example.timedeal.dto.product.response.ProductResponse;
-import com.example.timedeal.service.ProductService;
+import com.example.timedeal.service.product.ProductService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

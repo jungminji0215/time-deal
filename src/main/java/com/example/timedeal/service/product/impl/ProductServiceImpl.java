@@ -1,11 +1,11 @@
-package com.example.timedeal.service.impl;
+package com.example.timedeal.service.product.impl;
 
 import com.example.timedeal.domain.product.Product;
 import com.example.timedeal.domain.product.ProductRepository;
 import com.example.timedeal.dto.product.request.ProductCreateRequest;
 import com.example.timedeal.dto.product.request.ProductUpdateRequest;
 import com.example.timedeal.dto.product.response.ProductResponse;
-import com.example.timedeal.service.ProductService;
+import com.example.timedeal.service.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
