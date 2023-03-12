@@ -65,20 +65,21 @@
 
 🚧 구매 정보 관련 엔티티 추가 예정
 
-## API 스펙
+## API
 
 
-| 기능       | HTTP Method | HTTP Path           |
-|----------|-------------|---------------------|
+| 기능      | HTTP Method | HTTP Path           |
+|---------|-------------|---------------------|
 | [회원] 가입 | POST        | /user               |
-| [회원] 탈퇴  | DELETE        | /user               |
-| [회원] 조회  | GET        | /user/{userId}      |
-| [상품] 등록  | POST       | /product               |
-| [상품] 수정  | PUT        | /product/{productId} |
-| [상품] 삭제  | DELETE     | /product/{productId} |
-| [상품] 목록  | GET        | /product               |
-| [상품] 상세  | GET        | /product  /{productId} |
-| [상품] 구매  | POST        | /product/{productId}  |
+| [회원] 탈퇴 | DELETE      | /user               |
+| [회원] 조회 | GET         | /user/{userId}      |
+| [회원] 수정 | PUT         | /user/{userId}      |
+| [상품] 등록 | POST        | /product               |
+| [상품] 수정 | PUT         | /product/{productId} |
+| [상품] 삭제 | DELETE      | /product/{productId} |
+| [상품] 목록 | GET         | /product               |
+| [상품] 상세 | GET         | /product  /{productId} |
+| [상품] 구매 | POST        | /product/{productId}  |
 
 
 

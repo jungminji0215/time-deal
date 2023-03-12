@@ -1,4 +1,4 @@
-package com.example.timedeal.service;
+package com.example.timedeal.service.product;
 
 import com.example.timedeal.dto.product.request.ProductCreateRequest;
 import com.example.timedeal.dto.product.request.ProductUpdateRequest;
