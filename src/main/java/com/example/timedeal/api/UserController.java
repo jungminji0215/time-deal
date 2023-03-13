@@ -1,4 +1,4 @@
-package com.example.timedeal.controller;
+package com.example.timedeal.api;
 
 import com.example.timedeal.dto.user.request.CreateUserRequest;
 import com.example.timedeal.dto.user.request.UpdateUserRequest;
