@@ -2,8 +2,8 @@ package com.example.timedeal.service.product.impl;
 
 import com.example.timedeal.domain.product.Product;
 import com.example.timedeal.domain.product.ProductRepository;
-import com.example.timedeal.dto.product.request.ProductCreateRequest;
-import com.example.timedeal.dto.product.request.ProductUpdateRequest;
+import com.example.timedeal.dto.product.request.CreateProductRequest;
+import com.example.timedeal.dto.product.request.UpdateProductRequest;
 import com.example.timedeal.dto.product.response.ProductResponse;
 import com.example.timedeal.service.product.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -20,14 +20,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public void createProduct(ProductCreateRequest request) {
+    public void createProduct(CreateProductRequest request) {
         Product product = request.toEntity(request);
         productRepository.save(product);
     }
 
     @Override
     @Transactional
-    public void updateProduct(ProductUpdateRequest request, Long productId) {
+    public void updateProduct(UpdateProductRequest request, Long productId) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(()-> new IllegalArgumentException("상품을 찾을 수 없습니다. id:" + productId));
         product.update(request);

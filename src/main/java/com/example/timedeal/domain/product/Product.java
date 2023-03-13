@@ -1,16 +1,16 @@
 package com.example.timedeal.domain.product;
 
-import com.example.timedeal.dto.product.request.ProductCreateRequest;
-import com.example.timedeal.dto.product.request.ProductUpdateRequest;
+import com.example.timedeal.domain.order.Order;
+import com.example.timedeal.dto.product.request.CreateProductRequest;
+import com.example.timedeal.dto.product.request.UpdateProductRequest;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -18,25 +18,28 @@ import javax.persistence.Id;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
-    String name;
+    private String name;
 
-    int price;
+    private int price;
 
-    int stockQuantity;
+    private int stockQuantity;
 
     @ColumnDefault("false")
     boolean isDeleted;
 
+    @OneToMany(mappedBy = "product")
+    private List<Order> orders = new ArrayList<>();
+
     @Builder
-    public Product(ProductCreateRequest request){
+    public Product(CreateProductRequest request){
         this.name = request.getName();
         this.price = request.getPrice();
         this.stockQuantity = request.getStockQuantity();
     }
 
-    public void update(ProductUpdateRequest request) {
+    public void update(UpdateProductRequest request) {
         this.name = request.getName();
         this.price = request.getPrice();
         this.stockQuantity = request.getStockQuantity();
@@ -44,5 +47,12 @@ public class Product {
 
     public void delete() {
         this.isDeleted = true;
+    }
+
+    public void checkStockQuantity() {
+        if(this.stockQuantity == 0){
+            throw new IllegalArgumentException("재고가 없습니다.");
+        }
+        this.stockQuantity--;
     }
 }

@@ -1,8 +1,8 @@
-package com.example.timedeal.controller;
+package com.example.timedeal.api;
 
 
-import com.example.timedeal.dto.product.request.ProductCreateRequest;
-import com.example.timedeal.dto.product.request.ProductUpdateRequest;
+import com.example.timedeal.dto.product.request.CreateProductRequest;
+import com.example.timedeal.dto.product.request.UpdateProductRequest;
 import com.example.timedeal.dto.product.response.ProductResponse;
 import com.example.timedeal.service.product.ProductService;
 import org.springframework.web.bind.annotation.*;
@@ -24,13 +24,13 @@ public class ProductController {
     }
 
     @PostMapping("/product")
-    public void createProduct(@RequestBody ProductCreateRequest request){
+    public void createProduct(@RequestBody CreateProductRequest request){
         productService.createProduct(request);
     }
 
     @PutMapping("/product/{productId}")
     public void updateProduct(
-            @RequestBody ProductUpdateRequest request,
+            @RequestBody UpdateProductRequest request,
             @PathVariable Long productId
     ){
         productService.updateProduct(request, productId);
