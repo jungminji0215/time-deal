@@ -9,6 +9,7 @@ import com.example.timedeal.domain.user.UserRepository;
 import com.example.timedeal.dto.order.request.CreateOrderRequest;
 import com.example.timedeal.dto.order.response.CreateOrderResponse;
 import com.example.timedeal.service.order.OrderService;
+import com.example.timedeal.utils.ResponseResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +28,6 @@ public class OrderServiceImpl implements OrderService {
         Long userId = (long) Integer.parseInt(requestHeader.split(" ")[1]);
         User user = userRepository.findById(userId)
                 .orElseThrow(()-> new IllegalArgumentException("회원을 찾을 수 없습니다. id:" + userId));
-
 
         // 상품 찾기
         Product product = productRepository.findById(request.getProductId())

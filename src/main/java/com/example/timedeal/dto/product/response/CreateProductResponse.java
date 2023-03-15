@@ -2,26 +2,23 @@ package com.example.timedeal.dto.product.response;
 
 import com.example.timedeal.domain.product.Product;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
-public class ProductResponse {
-    Long id;
+@Data
+public class CreateProductResponse {
+    private Long id;
 
-    String name;
+    private String name;
 
-    int price;
+    private int price;
 
-    int stockQuantity;
-
-    boolean isDeleted;
+    private int stockQuantity;
 
     @Builder
-    public ProductResponse(Product product){
+    public CreateProductResponse(Product product) {
         this.id = product.getId();
         this.name = product.getName();
         this.price = product.getPrice();
         this.stockQuantity = product.getStockQuantity();
-        this.isDeleted = product.isDeleted();
     }
 }

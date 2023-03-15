@@ -6,11 +6,13 @@ import lombok.Getter;
 
 @Getter
 public class CreateProductRequest {
-    String name;
+    private String name;
 
-    int price;
+    private int price;
 
-    int stockQuantity;
+    private int stockQuantity;
+
+    private CreateProductSale productSale;
 
     public Product toEntity(CreateProductRequest request) {
         return Product.builder()
