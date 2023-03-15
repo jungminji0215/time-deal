@@ -4,10 +4,9 @@
 - [사용 기술](#사용-기술)
 - [프로젝트 설명](#프로젝트-설명)
 - [설계](#설계)
-- [API 스펙](#API-스펙)
+- [API](#API)
 - [트러블 슈팅](#트러블-슈팅)
 - [브랜치 전략](#브랜치-전략)
-- [관리](#관리)
 - [배포 해보기](#배포-해보기)
 
 ---
@@ -20,8 +19,6 @@
 <a><img src="https://img.shields.io/badge/Gradle-02303A?style=flat-square&logo=Gradle&logoColor=white"/></a>
 <a><img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=Git&logoColor=white"/></a>
 <a><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/></a>
-
-
 
 ## 프로젝트 설명
 
@@ -55,15 +52,11 @@
 
 ### ERD
 
-<img width="721" alt="스크린샷 2023-03-12 오후 1 27 16" src="https://user-images.githubusercontent.com/83000829/224524325-cdc34635-0a83-43f3-8abb-394c129a12b6.png">
-
-🚧 재고정보, 시간정보 테이블 설계 고민중
+<img width="752" alt="스크린샷 2023-03-16 오전 1 26 13" src="https://user-images.githubusercontent.com/83000829/225375590-9e87abee-b986-4382-a247-20ab8c21d0e4.png">
 
 ### Entity
 
-<img width="437" alt="스크린샷 2023-03-02 오후 9 03 17" src="https://user-images.githubusercontent.com/83000829/222423587-3db341df-3dea-4153-88ae-cff7fca74926.png">
-
-🚧 order 엔티티 추가 예정
+<img width="661" alt="스크린샷 2023-03-16 오전 1 30 03" src="https://user-images.githubusercontent.com/83000829/225376622-f8c15c7d-97ea-45a2-a26b-c414c8e84afb.png">
 
 ## API
 
@@ -84,10 +77,21 @@
 | [상품] 상품별 구매 유저 리스트 | GET         | /products/{productId}/user |
 
 
-
 ## 트러블 슈팅
 
 🚧 업데이트 예정
+
+## 브랜치 전략
+
+기능 개발을 체계적으로 해보고싶어서 브랜치 전략 사용
+
+<img width="528" alt="스크린샷 2023-03-16 오전 1 31 25" src="https://user-images.githubusercontent.com/83000829/225377053-2a378f57-aff1-4f04-a2eb-a145877816a3.png">
+
+- github 브랜치 전략을 사용하여 프로젝트 진행
+  - feature : [주요 기능](https://github.com/jungminji0215/time-deal/issues)에 대한 작업을 하는 브랜치
+    - 개발이 완료되면 PR을 올리고, main에 머지
+  - main : 개발이 완료되면 feature 브랜치를 머지
+
 
 ## 배포 해보기
 
