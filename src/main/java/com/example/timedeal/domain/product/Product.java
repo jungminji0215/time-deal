@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,5 +69,11 @@ public class Product {
     public void addSaleInfo(ProductSale productSale) {
         this.productSale = productSale;
         productSale.addProduct(this);
+    }
+
+    public void checkTime() {
+        if(productSale.getFinishedAt().isBefore(LocalDateTime.now())){
+            throw new IllegalArgumentException("특가시간이 지났습니다.");
+        }
     }
 }

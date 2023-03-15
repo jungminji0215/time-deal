@@ -24,19 +24,18 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public CreateOrderResponse order(CreateOrderRequest request, String requestHeader) {
-        // 회원 찾기
         Long userId = (long) Integer.parseInt(requestHeader.split(" ")[1]);
+
         User user = userRepository.findById(userId)
                 .orElseThrow(()-> new IllegalArgumentException("회원을 찾을 수 없습니다. id:" + userId));
 
-        // 상품 찾기
         Product product = productRepository.findById(request.getProductId())
                 .orElseThrow(()-> new IllegalArgumentException("상품을 찾을 수 없습니다. id:" + request.getProductId()));
 
-        // 재고 check and 차감
+        product.checkTime();
+
         product.checkStockQuantity();
 
-        // order 생성
         Order order = Order.createOrder(user, product);
 
         return orderRepository.save(order).toResponse();

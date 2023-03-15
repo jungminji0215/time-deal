@@ -2,12 +2,14 @@ package com.example.timedeal.domain.product.sale;
 
 import com.example.timedeal.domain.product.Product;
 import com.example.timedeal.dto.product.request.CreateProductSale;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
+@Getter
 @Entity
 public class ProductSale {
     @Id
