@@ -1,6 +1,7 @@
 package com.example.timedeal.domain.product;
 
 import com.example.timedeal.domain.order.Order;
+import com.example.timedeal.domain.product.sale.ProductSale;
 import com.example.timedeal.dto.product.request.CreateProductRequest;
 import com.example.timedeal.dto.product.request.UpdateProductRequest;
 import lombok.Builder;
@@ -32,6 +33,9 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<Order> orders = new ArrayList<>();
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "product")
+    private ProductSale productSale;
+
     @Builder
     public Product(CreateProductRequest request){
         this.name = request.getName();
@@ -54,5 +58,15 @@ public class Product {
             throw new IllegalArgumentException("재고가 없습니다.");
         }
         this.stockQuantity--;
+    }
+
+    public void addOrder(Order order) {
+        this.orders.add(order);
+    }
+
+
+    public void addSaleInfo(ProductSale productSale) {
+        this.productSale = productSale;
+        productSale.addProduct(this);
     }
 }

@@ -2,9 +2,11 @@ package com.example.timedeal.service.product.impl;
 
 import com.example.timedeal.domain.product.Product;
 import com.example.timedeal.domain.product.ProductRepository;
+import com.example.timedeal.domain.product.sale.ProductSale;
 import com.example.timedeal.dto.product.request.CreateProductRequest;
 import com.example.timedeal.dto.product.request.UpdateProductRequest;
-import com.example.timedeal.dto.product.response.ProductResponse;
+import com.example.timedeal.dto.product.response.CreateProductResponse;
+import com.example.timedeal.dto.product.response.GetProductResponse;
 import com.example.timedeal.service.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,9 +22,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public void createProduct(CreateProductRequest request) {
+    public CreateProductResponse createProduct(CreateProductRequest request) {
         Product product = request.toEntity(request);
-        productRepository.save(product);
+        product.addSaleInfo(new ProductSale(request.getProductSale()));
+        return new CreateProductResponse(productRepository.save(product));
     }
 
     @Override
@@ -43,16 +46,17 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional(readOnly = true)
-    public ProductResponse getProduct(Long productId) {
+    public GetProductResponse getProduct(Long productId) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(()-> new IllegalArgumentException("상품을 찾을 수 없습니다. id:" + productId));
-        return new ProductResponse(product);
+        return new GetProductResponse(product);
     }
 
     @Override
-    public List<ProductResponse> listProduct() {
+    @Transactional(readOnly = true)
+    public List<GetProductResponse> listProduct() {
         return productRepository.findAll().stream()
-                .map(ProductResponse::new)
+                .map(GetProductResponse::new)
                 .collect(Collectors.toList());
     }
 }

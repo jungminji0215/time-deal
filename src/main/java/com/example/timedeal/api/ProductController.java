@@ -3,11 +3,9 @@ package com.example.timedeal.api;
 
 import com.example.timedeal.dto.product.request.CreateProductRequest;
 import com.example.timedeal.dto.product.request.UpdateProductRequest;
-import com.example.timedeal.dto.product.response.ProductResponse;
 import com.example.timedeal.service.product.ProductService;
+import com.example.timedeal.utils.ResponseResult;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 public class ProductController {
@@ -18,17 +16,17 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/product/{productId}")
-    public ProductResponse getProduct( @PathVariable Long productId){
-        return productService.getProduct(productId);
+    @GetMapping("/products/{productId}")
+    public ResponseResult<?> getProduct( @PathVariable Long productId){
+        return new ResponseResult<>(productService.getProduct(productId));
     }
 
-    @PostMapping("/product")
-    public void createProduct(@RequestBody CreateProductRequest request){
-        productService.createProduct(request);
+    @PostMapping("/products")
+    public ResponseResult<?> createProduct(@RequestBody CreateProductRequest request){
+        return new ResponseResult<>(productService.createProduct(request));
     }
 
-    @PutMapping("/product/{productId}")
+    @PutMapping("/products/{productId}")
     public void updateProduct(
             @RequestBody UpdateProductRequest request,
             @PathVariable Long productId
@@ -36,15 +34,16 @@ public class ProductController {
         productService.updateProduct(request, productId);
     }
 
-    @DeleteMapping("/product/{productId}")
+    @DeleteMapping("/products/{productId}")
     public void deleteProduct(
             @PathVariable Long productId
     ){
         productService.deleteProduct(productId);
     }
 
-    @GetMapping("/product")
-    public List<ProductResponse> listProduct(){
-        return productService.listProduct();
+    @GetMapping("/products")
+    public ResponseResult<?> listProduct(){
+        return new ResponseResult<>(productService.listProduct());
+
     }
 }

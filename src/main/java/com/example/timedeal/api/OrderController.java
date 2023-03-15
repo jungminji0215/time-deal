@@ -3,11 +3,9 @@ package com.example.timedeal.api;
 import com.example.timedeal.dto.order.request.CreateOrderRequest;
 import com.example.timedeal.dto.order.response.CreateOrderResponse;
 import com.example.timedeal.service.order.OrderService;
+import com.example.timedeal.utils.ResponseResult;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -20,5 +18,10 @@ public class OrderController {
             @RequestHeader("Authentication") String requestHeader
     ){
         return orderService.order(request, requestHeader);
+    }
+
+    @GetMapping("/order/product/{productId}")
+    public ResponseResult listProduct(){
+        return orderService.listProduct();
     }
 }
