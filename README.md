@@ -60,21 +60,47 @@
 
 ## API
 
+### 회원
 
-| 기능                 | HTTP Method | HTTP Path                  |
-|--------------------|-------------|----------------------------|
-| [회원] 가입            | POST        | /user                      |
-| [회원] 탈퇴            | DELETE      | /user                      |
-| [회원] 조회            | GET         | /user/{userId}             |
-| [회원] 수정            | PUT         | /user/{userId}             |
-| [회원] 회원별 구매 상품 리스트 | GET         | /user/{userId}/product     |
-| [상품] 등록            | POST        | /products                  |
-| [상품] 수정            | PUT         | /products/{productId}      |
-| [상품] 삭제            | DELETE      | /products/{productId}      |
-| [상품] 목록            | GET         | /products                  |
-| [상품] 상세            | GET         | /products/{productId}      |
-| [상품] 구매            | POST        | /order                     |
-| [상품] 상품별 구매 유저 리스트 | GET         | /products/{productId}/user |
+|    | 기능                      | HTTP Method | HTTP Path                 |
+|----|-------------------------|--------------|---------------------------|
+| ✅ | [회원] 가입                | POST        | /user                      |
+| ✅ | [회원] 탈퇴                | DELETE      | /user                      |
+| ✅ | [회원] 조회                | GET         | /user/{userId}             |
+| ✅ | [회원] 수정                | PUT         | /user/{userId}             |
+|    | [회원] 회원별 구매 상품 리스트  | GET        | /user/{userId}/product     |
+
+### 상품
+
+|  | 기능                     | HTTP Method | HTTP Path                    |
+|--|-------------------------|-------------|------------------------------|
+|✅| [상품] 등록                | POST        | /products                    |
+|✅| [상품] 수정                | PUT         | /products/{productId}        |
+|✅| [상품] 삭제                | DELETE      | /products/{productId}        |
+|✅| [상품] 목록                | GET         | /products                    |
+|✅|[상품] 상세                 | GET         | /products/{productId}        |
+|  | [상품] 상품별 구매 유저 리스트 | GET         | /products/{productId}/user   |
+
+### 주문 
+
+|  | 기능                 | HTTP Method | HTTP Path                       |
+|--|---------------------|-------------|---------------------------------|
+|✅| [구매] 구매            | POST        | /order                          |
+
+---
+
+|   | 기능           |  
+|---|---------------| 
+|   | 테스트코드       | 
+|   | API 문서       |  
+|   | CI/CD 구축     |  
+|   | 성능 테스트      |  
+
+## TODO (추가하고싶은 기능)
+
+- 스프링 시큐리티 로그인
+- 카카오 로그인 적용
+- 상품 여러개 구매
 
 
 ## 트러블 슈팅
