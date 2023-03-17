@@ -6,15 +6,17 @@ import lombok.Getter;
 
 @Getter
 public class GetProductResponse {
-    Long id;
+    private Long id;
 
-    String name;
+    private String name;
 
-    int price;
+    private int price;
 
-    int stockQuantity;
+    private int stockQuantity;
 
-    boolean isDeleted;
+    private boolean isDeleted;
+
+    private CreateProductSaleResponse saleInfo;
 
     @Builder
     public GetProductResponse(Product product){
@@ -23,5 +25,6 @@ public class GetProductResponse {
         this.price = product.getPrice();
         this.stockQuantity = product.getStockQuantity();
         this.isDeleted = product.isDeleted();
+        this.saleInfo = product.getProductSale().toResponse();
     }
 }

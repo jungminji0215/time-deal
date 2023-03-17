@@ -1,7 +1,8 @@
 package com.example.timedeal.domain.product.sale;
 
 import com.example.timedeal.domain.product.Product;
-import com.example.timedeal.dto.product.request.CreateProductSale;
+import com.example.timedeal.dto.product.request.CreateProductSaleRequest;
+import com.example.timedeal.dto.product.response.CreateProductSaleResponse;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -20,6 +21,10 @@ public class ProductSale {
 
     private LocalDateTime finishedAt;
 
+    private int discount;
+
+    private int discountPrice;
+
     @OneToOne
     @JoinColumn(name = "product_id")
     private Product product;
@@ -28,8 +33,14 @@ public class ProductSale {
         this.product = product;
     }
 
-    public ProductSale(CreateProductSale request) {
+    public ProductSale(CreateProductSaleRequest request, int discountPrice) {
         this.startedAt = request.getStartedAt();
         this.finishedAt = request.getFinishedAt();
+        this.discount = request.getDiscount();
+        this.discountPrice = discountPrice;
+    }
+
+    public CreateProductSaleResponse toResponse() {
+        return new CreateProductSaleResponse(startedAt, finishedAt, discount, discountPrice);
     }
 }
