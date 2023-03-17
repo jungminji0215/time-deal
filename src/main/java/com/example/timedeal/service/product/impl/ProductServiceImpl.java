@@ -1,5 +1,6 @@
 package com.example.timedeal.service.product.impl;
 
+import com.example.timedeal.common.DiscountProductService;
 import com.example.timedeal.domain.product.Product;
 import com.example.timedeal.domain.product.ProductRepository;
 import com.example.timedeal.domain.product.sale.ProductSale;
@@ -19,12 +20,16 @@ import java.util.stream.Collectors;
 @Service
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
+    private final DiscountProductService discountProductService;
 
     @Override
     @Transactional
     public CreateProductResponse createProduct(CreateProductRequest request) {
         Product product = request.toEntity(request);
-        product.addSaleInfo(new ProductSale(request.getProductSale()));
+
+        int discountPrice = discountProductService.calculateProductSale(request.getPrice(), request.getProductSale().getDiscount());
+        product.addSaleInfo(new ProductSale(request.getProductSale(), discountPrice));
+
         return new CreateProductResponse(productRepository.save(product));
     }
 

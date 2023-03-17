@@ -5,8 +5,10 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class CreateProductSale {
+public class CreateProductSaleRequest {
     private LocalDateTime startedAt;
 
     private LocalDateTime finishedAt;
+
+    private int discount;
 }

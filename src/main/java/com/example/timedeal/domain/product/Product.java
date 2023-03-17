@@ -65,7 +65,6 @@ public class Product {
         this.orders.add(order);
     }
 
-
     public void addSaleInfo(ProductSale productSale) {
         this.productSale = productSale;
         productSale.addProduct(this);

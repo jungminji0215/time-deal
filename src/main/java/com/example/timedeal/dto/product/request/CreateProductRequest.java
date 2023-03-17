@@ -12,7 +12,7 @@ public class CreateProductRequest {
 
     private int stockQuantity;
 
-    private CreateProductSale productSale;
+    private CreateProductSaleRequest productSale;
 
     public Product toEntity(CreateProductRequest request) {
         return Product.builder()
