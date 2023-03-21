@@ -52,11 +52,12 @@
 
 ### ERD
 
-<img width="752" alt="스크린샷 2023-03-16 오전 1 26 13" src="https://user-images.githubusercontent.com/83000829/225375590-9e87abee-b986-4382-a247-20ab8c21d0e4.png">
+<img width="715" alt="스크린샷 2023-03-22 오전 2 31 10" src="https://user-images.githubusercontent.com/83000829/226693312-c67844b6-a50e-4ddb-ab84-6c87ad069618.png">
+
 
 ### Entity
 
-<img width="661" alt="스크린샷 2023-03-16 오전 1 30 03" src="https://user-images.githubusercontent.com/83000829/225376622-f8c15c7d-97ea-45a2-a26b-c414c8e84afb.png">
+<img width="662" alt="스크린샷 2023-03-22 오전 2 30 10" src="https://user-images.githubusercontent.com/83000829/226693068-371641cc-3f7a-44fd-b9f6-449ad8abc8f2.png">
 
 ## API
 
