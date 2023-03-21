@@ -9,7 +9,6 @@ import com.example.timedeal.dto.user.response.DeleteUserResponse;
 import com.example.timedeal.dto.user.response.UpdateUserResponse;
 import com.example.timedeal.dto.user.response.UserResponse;
 import com.example.timedeal.service.user.UserService;
-import com.example.timedeal.utils.ResponseResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,17 +24,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public ResponseResult list() {
+    public List<UserResponse> list() {
         List<User> findUser = userRepository.findAll();
         List<UserResponse> result = findUser.stream()
                 .map(UserResponse::new)
                 .collect(Collectors.toList());
-        return new ResponseResult(result);
+        return result;
     }
 
     @Override
-    public ResponseResult findOne(Long userId) {
-        return new ResponseResult(userRepository.findById(userId));
+    public UserResponse findOne(Long userId) {
+        return new UserResponse(userRepository.findById(userId).get());
     }
 
     @Override

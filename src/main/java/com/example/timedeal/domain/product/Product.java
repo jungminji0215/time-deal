@@ -20,6 +20,7 @@ import java.util.List;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_id")
     private Long id;
 
     private String name;
@@ -34,7 +35,7 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<Order> orders = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "product")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.LAZY)
     private ProductSale productSale;
 
     @Builder

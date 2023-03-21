@@ -5,7 +5,9 @@ import com.example.timedeal.dto.user.request.UpdateUserRequest;
 import com.example.timedeal.dto.user.response.CreateUserResponse;
 import com.example.timedeal.dto.user.response.DeleteUserResponse;
 import com.example.timedeal.dto.user.response.UpdateUserResponse;
-import com.example.timedeal.utils.ResponseResult;
+import com.example.timedeal.dto.user.response.UserResponse;
+
+import java.util.List;
 
 public interface UserService {
     CreateUserResponse join(CreateUserRequest request);
@@ -14,7 +16,7 @@ public interface UserService {
 
     DeleteUserResponse delete(Long userId);
 
-    ResponseResult list();
+    List<UserResponse> list();
 
-    ResponseResult findOne(Long userId);
+    UserResponse findOne(Long userId);
 }

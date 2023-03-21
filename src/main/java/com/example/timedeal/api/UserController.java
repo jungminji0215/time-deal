@@ -2,9 +2,7 @@ package com.example.timedeal.api;
 
 import com.example.timedeal.dto.user.request.CreateUserRequest;
 import com.example.timedeal.dto.user.request.UpdateUserRequest;
-import com.example.timedeal.dto.user.response.CreateUserResponse;
 import com.example.timedeal.dto.user.response.DeleteUserResponse;
-import com.example.timedeal.dto.user.response.UpdateUserResponse;
 import com.example.timedeal.service.user.UserService;
 import com.example.timedeal.utils.ResponseResult;
 import lombok.RequiredArgsConstructor;
@@ -15,33 +13,34 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/user")
-    public ResponseResult list(){
-        return userService.list();
+    @GetMapping("/users")
+    public ResponseResult<?> list(){
+        return new ResponseResult<>(userService.list());
     }
 
-    @GetMapping("/user/{userId}")
-    public ResponseResult findOne(
+    @GetMapping("/users/{userId}")
+    public ResponseResult<?> findOne(
             @PathVariable Long userId
     ){
-        return userService.findOne(userId);
+        return new ResponseResult<>(userService.findOne(userId));
     }
 
-    @PostMapping("/user")
-    public CreateUserResponse createUser(@RequestBody  CreateUserRequest request){
-        return userService.join(request);
+    @PostMapping("/users")
+    public ResponseResult<?>  createUser(@RequestBody  CreateUserRequest request){
+        return new ResponseResult<>(userService.join(request));
     }
 
-    @PutMapping("/user/{userId}")
-    private UpdateUserResponse updateUser(
+    @PutMapping("/users/{userId}")
+    private ResponseResult<?>  updateUser(
             @PathVariable Long userId,
             @RequestBody UpdateUserRequest request
     ){
-        return userService.update(userId, request);
+        return new ResponseResult<>(userService.update(userId, request));
     }
 
-    @DeleteMapping("/user/{userId}")
+    @DeleteMapping("/users/{userId}")
     public DeleteUserResponse deleteUser(@PathVariable Long userId){
         return userService.delete(userId);
     }
+
 }
