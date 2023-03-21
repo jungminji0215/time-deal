@@ -32,10 +32,12 @@ public class Product {
     @ColumnDefault("false")
     boolean isDeleted;
 
+    // todo 지우기
     @OneToMany(mappedBy = "product")
     private List<Order> orders = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_sale_id")
     private ProductSale productSale;
 
     @Builder

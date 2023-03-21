@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 public class ProductSale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_sale_id")
     private Long id;
 
     private LocalDateTime startedAt;
@@ -25,8 +26,7 @@ public class ProductSale {
 
     private int discountPrice;
 
-    @OneToOne
-    @JoinColumn(name = "product_id")
+    @OneToOne(mappedBy = "productSale", fetch = FetchType.LAZY)
     private Product product;
 
     public void addProduct(Product product) {
