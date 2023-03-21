@@ -8,11 +8,14 @@ import com.example.timedeal.domain.user.User;
 import com.example.timedeal.domain.user.UserRepository;
 import com.example.timedeal.dto.order.request.CreateOrderRequest;
 import com.example.timedeal.dto.order.response.CreateOrderResponse;
+import com.example.timedeal.dto.order.response.GetOrderProductResponse;
 import com.example.timedeal.service.order.OrderService;
-import com.example.timedeal.utils.ResponseResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -39,5 +42,15 @@ public class OrderServiceImpl implements OrderService {
         Order order = Order.createOrder(user, product);
 
         return orderRepository.save(order).toResponse();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<GetOrderProductResponse> productList(Long userId) {
+        List<GetOrderProductResponse> result = orderRepository.findAllByUserId(userId).stream()
+                .map(order -> new GetOrderProductResponse(order.getProduct().getId(), order.getProduct().getName()))
+                .collect(Collectors.toList());
+
+        return result;
     }
 }

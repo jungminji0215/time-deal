@@ -16,20 +16,21 @@ import javax.persistence.*;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    @Column(name = "order_id")
+    private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    User user;
+    private User user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
-    Product product;
+    private Product product;
 
     public static Order createOrder(User user, Product product) {
         Order order = new Order();
         order.user = user;
-        user.addOrder(order);
+//        user.addOrder(order);
         order.product = product;
         product.addOrder(order);
         return order;

@@ -1,6 +1,5 @@
 package com.example.timedeal.domain.user;
 
-import com.example.timedeal.domain.order.Order;
 import com.example.timedeal.dto.user.request.UpdateUserRequest;
 import com.example.timedeal.dto.user.response.CreateUserResponse;
 import com.example.timedeal.dto.user.response.DeleteUserResponse;
@@ -12,8 +11,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -21,6 +18,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
 
     private String name;
@@ -30,9 +28,6 @@ public class User {
 
     @ColumnDefault("false")
     private boolean quit;
-
-    @OneToMany(mappedBy = "user")
-    private List<Order> orders = new ArrayList<>();
 
     @Builder
     public User(Long id, String name, UserType type, boolean quit) {
@@ -74,9 +69,5 @@ public class User {
                 .id(id)
                 .quit(quit)
                 .build();
-    }
-
-    public void addOrder(Order order) {
-        this.orders.add(order);
     }
 }
