@@ -1,15 +1,15 @@
-package com.example.timedeal.dto.order.response;
+package com.example.timedeal.dto.purchase.response;
 
 import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class CreateOrderResponse {
+public class CreatePurchaseResponse {
     private Long userId;
     private Long productId;
 
     @Builder
-    public CreateOrderResponse(Long userId, Long productId) {
+    public CreatePurchaseResponse(Long userId, Long productId) {
         this.userId = userId;
         this.productId = productId;
     }

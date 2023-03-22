@@ -1,6 +1,6 @@
 package com.example.timedeal.domain.product;
 
-import com.example.timedeal.domain.order.Order;
+import com.example.timedeal.domain.purchase.Purchase;
 import com.example.timedeal.domain.product.sale.ProductSale;
 import com.example.timedeal.dto.product.request.CreateProductRequest;
 import com.example.timedeal.dto.product.request.UpdateProductRequest;
@@ -34,7 +34,7 @@ public class Product {
 
     // todo 지우기
     @OneToMany(mappedBy = "product")
-    private List<Order> orders = new ArrayList<>();
+    private List<Purchase> purchases = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "product_sale_id")
@@ -64,8 +64,8 @@ public class Product {
         this.stockQuantity--;
     }
 
-    public void addOrder(Order order) {
-        this.orders.add(order);
+    public void addPurchase(Purchase purchase) {
+        this.purchases.add(purchase);
     }
 
     public void addSaleInfo(ProductSale productSale) {
