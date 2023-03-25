@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @Data
-public class UpdateUserResponse {
+public class GetUserResponse {
     private Long id;
 
     private String name;
@@ -28,8 +28,8 @@ public class UpdateUserResponse {
 
     private boolean quit;
 
-    public static UpdateUserResponse toUpdateResponse(User user) {
-        return UpdateUserResponse.builder()
+    public static GetUserResponse toGetResponse(User user){
+        return GetUserResponse.builder()
                 .id(user.getId())
                 .name(user.getName())
                 .password(user.getPassword())
