@@ -2,45 +2,46 @@ package com.example.timedeal.api;
 
 import com.example.timedeal.dto.user.request.CreateUserRequest;
 import com.example.timedeal.dto.user.request.UpdateUserRequest;
+import com.example.timedeal.dto.user.response.CreateUserResponse;
 import com.example.timedeal.dto.user.response.DeleteUserResponse;
+import com.example.timedeal.dto.user.response.GetUserResponse;
+import com.example.timedeal.dto.user.response.UpdateUserResponse;
 import com.example.timedeal.service.user.UserService;
-import com.example.timedeal.utils.ResponseResult;
+import com.example.timedeal.utils.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
+@RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/users")
-    public ResponseResult<?> list(){
-        return new ResponseResult<>(userService.list());
+    @GetMapping
+    public ApiResponse<List<GetUserResponse> >list(){
+        return ApiResponse.success(userService.list());
     }
 
-    @GetMapping("/users/{userId}")
-    public ResponseResult<?> findOne(
-            @PathVariable Long userId
+    @GetMapping("/{userId}")
+    public ApiResponse<GetUserResponse> findOne(@PathVariable Long userId){
+        return ApiResponse.success(userService.findOne(userId));
+    }
+
+    @PostMapping
+    public ApiResponse<CreateUserResponse> join(@RequestBody CreateUserRequest request){
+        return ApiResponse.success(userService.join(request));
+    }
+
+    @PutMapping("/{userId}")
+    private ApiResponse<UpdateUserResponse> updateUser(@PathVariable Long userId, @RequestBody UpdateUserRequest request
     ){
-        return new ResponseResult<>(userService.findOne(userId));
+        return ApiResponse.success(userService.update(userId, request));
     }
 
-    @PostMapping("/users")
-    public ResponseResult<?>  createUser(@RequestBody  CreateUserRequest request){
-        return new ResponseResult<>(userService.join(request));
+    @DeleteMapping("/{userId}")
+    public ApiResponse<DeleteUserResponse> deleteUser(@PathVariable Long userId){
+        return ApiResponse.success(userService.delete(userId));
     }
-
-    @PutMapping("/users/{userId}")
-    private ResponseResult<?>  updateUser(
-            @PathVariable Long userId,
-            @RequestBody UpdateUserRequest request
-    ){
-        return new ResponseResult<>(userService.update(userId, request));
-    }
-
-    @DeleteMapping("/users/{userId}")
-    public DeleteUserResponse deleteUser(@PathVariable Long userId){
-        return userService.delete(userId);
-    }
-
 }
