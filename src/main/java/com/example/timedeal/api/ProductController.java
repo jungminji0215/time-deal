@@ -3,48 +3,54 @@ package com.example.timedeal.api;
 
 import com.example.timedeal.dto.product.request.CreateProductRequest;
 import com.example.timedeal.dto.product.request.UpdateProductRequest;
+import com.example.timedeal.dto.product.response.CreateProductResponse;
+import com.example.timedeal.dto.product.response.DeleteProductResponse;
+import com.example.timedeal.dto.product.response.GetProductResponse;
+import com.example.timedeal.dto.product.response.UpdateProductResponse;
 import com.example.timedeal.service.product.ProductService;
-import com.example.timedeal.utils.ResponseResult;
+import com.example.timedeal.utils.response.ApiResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
+@RequestMapping("/products")
+@RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
 
-    public ProductController(ProductService productService){
-        this.productService = productService;
+    @GetMapping
+    public ApiResponse<List<GetProductResponse>> list(){
+        return ApiResponse.success(productService.list());
     }
 
-    @PostMapping("/products")
-    public ResponseResult<?> createProduct(@RequestBody CreateProductRequest request){
-        return new ResponseResult<>(productService.createProduct(request));
+    @GetMapping("/{productId}")
+    public ApiResponse<GetProductResponse> findOne(
+            @PathVariable Long productId
+    ) {
+        return ApiResponse.success(productService.findOne(productId));
     }
 
-    @GetMapping("/products")
-    public ResponseResult<?> listProduct(){
-        return new ResponseResult<>(productService.listProduct());
-
+    @PostMapping
+    public ApiResponse<CreateProductResponse> create(
+            @RequestBody CreateProductRequest request
+    ){
+        return ApiResponse.success(productService.create(request));
     }
 
-    @GetMapping("/products/{productId}")
-    public ResponseResult<?> getProduct( @PathVariable Long productId){
-        return new ResponseResult<>(productService.getProduct(productId));
-    }
-
-    @PutMapping("/products/{productId}")
-    public void updateProduct(
+    @PutMapping("/{productId}")
+    public ApiResponse<UpdateProductResponse> update(
             @RequestBody UpdateProductRequest request,
             @PathVariable Long productId
     ){
-        productService.updateProduct(request, productId);
+        return ApiResponse.success(productService.update(request, productId));
     }
 
-    @DeleteMapping("/products/{productId}")
-    public void deleteProduct(
+    @DeleteMapping("/{productId}")
+    public ApiResponse<DeleteProductResponse> delete(
             @PathVariable Long productId
     ){
-        productService.deleteProduct(productId);
+        return ApiResponse.success(productService.delete(productId));
     }
-
-
 }

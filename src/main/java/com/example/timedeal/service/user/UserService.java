@@ -10,13 +10,15 @@ import com.example.timedeal.dto.user.response.GetUserResponse;
 import java.util.List;
 
 public interface UserService {
+    List<GetUserResponse> list();
+
+    GetUserResponse findOne(Long userId);
+
     CreateUserResponse join(CreateUserRequest request);
 
     UpdateUserResponse update(Long userId, UpdateUserRequest request);
 
     DeleteUserResponse delete(Long userId);
 
-    List<GetUserResponse> list();
 
-    GetUserResponse findOne(Long userId);
 }

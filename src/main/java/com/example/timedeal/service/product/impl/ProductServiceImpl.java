@@ -1,14 +1,18 @@
 package com.example.timedeal.service.product.impl;
 
-import com.example.timedeal.utils.DiscountProduct;
 import com.example.timedeal.domain.product.Product;
 import com.example.timedeal.domain.product.ProductRepository;
 import com.example.timedeal.domain.product.sale.ProductSale;
 import com.example.timedeal.dto.product.request.CreateProductRequest;
 import com.example.timedeal.dto.product.request.UpdateProductRequest;
 import com.example.timedeal.dto.product.response.CreateProductResponse;
+import com.example.timedeal.dto.product.response.DeleteProductResponse;
 import com.example.timedeal.dto.product.response.GetProductResponse;
+import com.example.timedeal.dto.product.response.UpdateProductResponse;
+import com.example.timedeal.exception.ErrorCode;
+import com.example.timedeal.exception.TimeDealException;
 import com.example.timedeal.service.product.ProductService;
+import com.example.timedeal.utils.DiscountProduct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,45 +26,54 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
-    @Transactional
-    public CreateProductResponse createProduct(CreateProductRequest request) {
-        Product product = request.toEntity(request);
-
-        int discountPrice = DiscountProduct.calculateProductSale(request.getPrice(), request.getProductSale().getDiscount());
-        product.addSaleInfo(new ProductSale(request.getProductSale(), discountPrice));
-
-        return new CreateProductResponse(productRepository.save(product));
-    }
-
-    @Override
-    @Transactional
-    public void updateProduct(UpdateProductRequest request, Long productId) {
-        Product product = productRepository.findById(productId)
-                .orElseThrow(()-> new IllegalArgumentException("상품을 찾을 수 없습니다. id:" + productId));
-        product.update(request);
-    }
-
-    @Override
-    @Transactional
-    public void deleteProduct(Long productId) {
-        Product product = productRepository.findById(productId)
-                .orElseThrow(()-> new IllegalArgumentException("상품을 찾을 수 없습니다. id:" + productId));
-        product.delete();
-    }
-
-    @Override
     @Transactional(readOnly = true)
-    public GetProductResponse getProduct(Long productId) {
-        Product product = productRepository.findById(productId)
-                .orElseThrow(()-> new IllegalArgumentException("상품을 찾을 수 없습니다. id:" + productId));
-        return new GetProductResponse(product);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<GetProductResponse> listProduct() {
+    public List<GetProductResponse> list() {
         return productRepository.findAll().stream()
-                .map(GetProductResponse::new)
+                .map(GetProductResponse::toGetResponse)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public GetProductResponse findOne(Long productId) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(()-> new TimeDealException(ErrorCode.PRODUCT_NOT_FOUND, "상품 아이디 : " + productId));
+        return GetProductResponse.toGetResponse(product);
+    }
+
+    @Override
+    @Transactional
+    public CreateProductResponse create(CreateProductRequest request) {
+        Product product = Product.of(request);
+
+        int discountPrice = DiscountProduct.calculateProductSale(request.getPrice(), request.getProductSale().getDiscount());
+        product.addSaleInfo(ProductSale.of(request.getProductSale(), discountPrice));
+
+        return CreateProductResponse.toCreateResponse(productRepository.save(product));
+    }
+
+    @Override
+    @Transactional
+    public UpdateProductResponse update(UpdateProductRequest request, Long productId) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(()-> new TimeDealException(ErrorCode.PRODUCT_NOT_FOUND, "상품 아이디 : " + productId));
+        product.update(request);
+
+        return UpdateProductResponse.toUpdateResponse(product);
+    }
+
+    @Override
+    @Transactional
+    public DeleteProductResponse delete(Long productId) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(()-> new TimeDealException(ErrorCode.PRODUCT_NOT_FOUND, "상품 아이디 : " + productId));
+        product.delete();
+
+        return DeleteProductResponse.toDeleteResponse(product);
+
+    }
+
+
+
+
 }

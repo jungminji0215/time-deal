@@ -5,12 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Builder
 @AllArgsConstructor
 @Data
-public class CreateProductResponse {
+public class UpdateProductResponse {
     private Long id;
 
     private String name;
@@ -19,23 +17,14 @@ public class CreateProductResponse {
 
     private int stockQuantity;
 
-    private LocalDateTime registeredAt;
-
-    private LocalDateTime updatedAt;
-
-    private LocalDateTime deletedAt;
-
     private CreateProductSaleResponse saleInfo;
 
-    public static CreateProductResponse toCreateResponse(Product product){
-        return CreateProductResponse.builder()
+    public static UpdateProductResponse toUpdateResponse(Product product){
+        return UpdateProductResponse.builder()
                 .id(product.getId())
                 .name(product.getName())
                 .price(product.getPrice())
                 .stockQuantity(product.getStockQuantity())
-                .registeredAt(product.getRegisteredAt())
-                .updatedAt(product.getUpdatedAt())
-                .deletedAt(product.getDeletedAt())
                 .saleInfo(product.getProductSale().toResponse())
                 .build();
     }
