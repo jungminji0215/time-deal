@@ -25,23 +25,31 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public ApiResponse<GetUserResponse> findOne(@PathVariable Long userId){
+    public ApiResponse<GetUserResponse> findOne(
+            @PathVariable Long userId
+    ){
         return ApiResponse.success(userService.findOne(userId));
     }
 
     @PostMapping
-    public ApiResponse<CreateUserResponse> join(@RequestBody CreateUserRequest request){
+    public ApiResponse<CreateUserResponse> join(
+            @RequestBody CreateUserRequest request
+    ){
         return ApiResponse.success(userService.join(request));
     }
 
     @PutMapping("/{userId}")
-    private ApiResponse<UpdateUserResponse> updateUser(@PathVariable Long userId, @RequestBody UpdateUserRequest request
+    private ApiResponse<UpdateUserResponse> updateUser(
+            @PathVariable Long userId,
+            @RequestBody UpdateUserRequest request
     ){
         return ApiResponse.success(userService.update(userId, request));
     }
 
     @DeleteMapping("/{userId}")
-    public ApiResponse<DeleteUserResponse> deleteUser(@PathVariable Long userId){
+    public ApiResponse<DeleteUserResponse> deleteUser(
+            @PathVariable Long userId
+    ){
         return ApiResponse.success(userService.delete(userId));
     }
 }

@@ -3,13 +3,17 @@ package com.example.timedeal.domain.product.sale;
 import com.example.timedeal.domain.product.Product;
 import com.example.timedeal.dto.product.request.CreateProductSaleRequest;
 import com.example.timedeal.dto.product.response.CreateProductSaleResponse;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Entity
 public class ProductSale {
@@ -33,11 +37,16 @@ public class ProductSale {
         this.product = product;
     }
 
-    public ProductSale(CreateProductSaleRequest request, int discountPrice) {
-        this.startedAt = request.getStartedAt();
-        this.finishedAt = request.getFinishedAt();
-        this.discount = request.getDiscount();
-        this.discountPrice = discountPrice;
+    public static ProductSale of(
+            CreateProductSaleRequest request,
+            int discountPrice
+    ){
+        return ProductSale.builder()
+                .startedAt(request.getStartedAt())
+                .finishedAt(request.getFinishedAt())
+                .discount(request.getDiscount())
+                .discountPrice(discountPrice)
+                .build();
     }
 
     public CreateProductSaleResponse toResponse() {

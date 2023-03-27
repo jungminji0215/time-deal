@@ -56,11 +56,12 @@ public class User {
     public void update(UpdateUserRequest request) {
         this.name = request.getName();
         this.password = request.getPassword();
-        this.updatedAt = LocalDateTime.now();
         this.type = request.getType();
+        this.updatedAt = LocalDateTime.now();
     }
 
     public void delete() {
         this.quit = true;
+        this.deletedAt = LocalDateTime.now();
     }
 }

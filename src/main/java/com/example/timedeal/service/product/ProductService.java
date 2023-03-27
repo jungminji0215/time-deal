@@ -3,18 +3,22 @@ package com.example.timedeal.service.product;
 import com.example.timedeal.dto.product.request.CreateProductRequest;
 import com.example.timedeal.dto.product.request.UpdateProductRequest;
 import com.example.timedeal.dto.product.response.CreateProductResponse;
+import com.example.timedeal.dto.product.response.DeleteProductResponse;
 import com.example.timedeal.dto.product.response.GetProductResponse;
+import com.example.timedeal.dto.product.response.UpdateProductResponse;
 
 import java.util.List;
 
 public interface ProductService {
-    CreateProductResponse createProduct(CreateProductRequest request);
+    GetProductResponse findOne(Long productId);
 
-    void updateProduct(UpdateProductRequest request, Long productId);
+    List<GetProductResponse> list();
 
-    void deleteProduct(Long productId);
+    CreateProductResponse create(CreateProductRequest request);
 
-    GetProductResponse getProduct(Long productId);
+    UpdateProductResponse update(UpdateProductRequest request, Long productId);
 
-    List<GetProductResponse> listProduct();
+    DeleteProductResponse delete(Long productId);
+
+
 }

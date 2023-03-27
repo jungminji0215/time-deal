@@ -1,9 +1,10 @@
 package com.example.timedeal.domain.product;
 
-import com.example.timedeal.domain.purchase.Purchase;
 import com.example.timedeal.domain.product.sale.ProductSale;
+import com.example.timedeal.domain.purchase.Purchase;
 import com.example.timedeal.dto.product.request.CreateProductRequest;
 import com.example.timedeal.dto.product.request.UpdateProductRequest;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Entity
 public class Product {
@@ -32,7 +35,13 @@ public class Product {
     @ColumnDefault("false")
     boolean isDeleted;
 
-    // todo 지우기
+    private LocalDateTime registeredAt;
+
+    private LocalDateTime updatedAt;
+
+    // soft delete
+    private LocalDateTime deletedAt;
+
     @OneToMany(mappedBy = "product")
     private List<Purchase> purchases = new ArrayList<>();
 
@@ -40,21 +49,29 @@ public class Product {
     @JoinColumn(name = "product_sale_id")
     private ProductSale productSale;
 
-    @Builder
-    public Product(CreateProductRequest request){
-        this.name = request.getName();
-        this.price = request.getPrice();
-        this.stockQuantity = request.getStockQuantity();
+    @PrePersist
+    void registeredAt(){
+        this.registeredAt = LocalDateTime.now();
+    }
+
+    public static Product of(CreateProductRequest request){
+        return Product.builder()
+                .name(request.getName())
+                .price(request.getPrice())
+                .stockQuantity(request.getStockQuantity())
+                .build();
     }
 
     public void update(UpdateProductRequest request) {
         this.name = request.getName();
         this.price = request.getPrice();
         this.stockQuantity = request.getStockQuantity();
+        this.updatedAt = LocalDateTime.now();
     }
 
     public void delete() {
         this.isDeleted = true;
+        this.deletedAt = LocalDateTime.now();
     }
 
     public void checkStockQuantity() {
