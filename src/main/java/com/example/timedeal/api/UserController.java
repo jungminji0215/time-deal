@@ -7,7 +7,7 @@ import com.example.timedeal.dto.user.response.DeleteUserResponse;
 import com.example.timedeal.dto.user.response.GetUserResponse;
 import com.example.timedeal.dto.user.response.UpdateUserResponse;
 import com.example.timedeal.service.user.UserService;
-import com.example.timedeal.utils.ApiResponse;
+import com.example.timedeal.utils.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +20,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public ApiResponse<List<GetUserResponse> >list(){
+    public ApiResponse<List<GetUserResponse>> list(){
         return ApiResponse.success(userService.list());
     }
 

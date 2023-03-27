@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public GetUserResponse findOne(Long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(()-> new TimeDealException(ErrorCode.NOT_EXISTS_USER, "존재하지 않는 유저입니다"));
+                .orElseThrow(()-> new TimeDealException(ErrorCode.USER_NOT_FOUNDED, "유저 아이디 : " + userId));
 
         return GetUserResponse.toGetResponse(user);
     }
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public UpdateUserResponse update(Long userId, UpdateUserRequest request) {
         User user = userRepository.findById(userId)
-                .orElseThrow(()-> new TimeDealException(ErrorCode.NOT_EXISTS_USER, "존재하지 않는 유저입니다"));
+                .orElseThrow(()-> new TimeDealException(ErrorCode.USER_NOT_FOUNDED, "유저 아이디 : " + userId));
         user.update(request);
 
         return UpdateUserResponse.toUpdateResponse(user);
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public DeleteUserResponse delete(Long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(()-> new TimeDealException(ErrorCode.NOT_EXISTS_USER, "존재하지 않는 유저입니다"));
+                .orElseThrow(()-> new TimeDealException(ErrorCode.USER_NOT_FOUNDED, "유저 아이디 : " + userId));
         user.delete();
         return DeleteUserResponse.toDeleteResponse(user);
     }
