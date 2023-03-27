@@ -13,8 +13,8 @@ public class TimeDealException extends RuntimeException{
     @Override
     public String getMessage(){
         if(message == null){
-            return errorCode.getMessage();
+            return errorCode.getErrorMessage();
         }
-        return String.format("%s. %s", errorCode.getMessage(), message);
+        return String.format("%s. %s", errorCode.getErrorMessage(), message);
     }
 }

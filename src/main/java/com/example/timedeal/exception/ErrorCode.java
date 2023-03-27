@@ -7,11 +7,12 @@ import org.springframework.http.HttpStatus;
 @Getter
 @AllArgsConstructor
 public enum ErrorCode {
-    DUPLICATED_USER_NAME(HttpStatus.CONFLICT, "[아이디가 중복되었습니다]"),
-    NOT_EXISTS_USER(HttpStatus.BAD_REQUEST , "[존재하지 않는 유저입니다]");
-    // TODO 상품 오류 추가
+    DUPLICATED_USER_NAME(HttpStatus.CONFLICT.value(), HttpStatus.CONFLICT, "아이디가 중복되었습니다"),
+    USER_NOT_FOUNDED(HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND , "존재하지 않는 유저입니다");
+
+    private int code;
 
     private HttpStatus status;
 
-    private String message;
+    private String errorMessage;
 }
