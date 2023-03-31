@@ -1,6 +1,6 @@
 package com.example.timedeal.mock;
 
-import com.example.timedeal.domain.user.User;
+import com.example.timedeal.user.domain.User;
 import com.example.timedeal.dto.user.request.CreateUserRequest;
 
 public class UserTest {
