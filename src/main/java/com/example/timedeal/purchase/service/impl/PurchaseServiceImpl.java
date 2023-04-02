@@ -9,8 +9,12 @@ import com.example.timedeal.purchase.dto.response.CreatePurchaseResponse;
 import com.example.timedeal.purchase.dto.response.GetPurchaseProductResponse;
 import com.example.timedeal.purchase.dto.response.GetPurchaseUserResponse;
 import com.example.timedeal.purchase.service.PurchaseService;
+import com.example.timedeal.timedeal.domain.TimeDeal;
+import com.example.timedeal.timedeal.domain.TimeDealRepository;
 import com.example.timedeal.user.domain.User;
 import com.example.timedeal.user.domain.UserRepository;
+import com.example.timedeal.utils.exception.ErrorCode;
+import com.example.timedeal.utils.exception.TimeDealException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +28,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     private final PurchaseRepository purchaseRepository;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
+    private final TimeDealRepository timeDealRepository;
 
     @Override
     @Transactional
@@ -31,18 +36,22 @@ public class PurchaseServiceImpl implements PurchaseService {
         Long userId = (long) Integer.parseInt(requestHeader.split(" ")[1]);
 
         User user = userRepository.findById(userId)
-                .orElseThrow(()-> new IllegalArgumentException("회원을 찾을 수 없습니다. id:" + userId));
+                .orElseThrow(()-> new TimeDealException(ErrorCode.USER_NOT_FOUNDED, "유저 아이디 : " + userId));
 
         Product product = productRepository.findById(request.getProductId())
-                .orElseThrow(()-> new IllegalArgumentException("상품을 찾을 수 없습니다. id:" + request.getProductId()));
+                .orElseThrow(()-> new TimeDealException(ErrorCode.PRODUCT_NOT_FOUND, "상품 아이디 : " + request.getProductId()));
 
-        product.checkTime();
+        TimeDeal timeDeal = timeDealRepository.findByProductId(request.getProductId())
+                .orElseThrow(()-> new TimeDealException(ErrorCode.TIME_DEAL_NOT_FOUND, "진행중인 타임딜이 상품이 아닙니다."));
 
-        product.checkStockQuantity();
 
-        Purchase purchase = Purchase.createPurchase(user, product);
+        timeDeal.checkTime();
 
-        return purchaseRepository.save(purchase).toResponse();
+        timeDeal.decreaseStock(request.getCnt());
+
+        Purchase purchase = Purchase.of(user, product);
+
+        return CreatePurchaseResponse.toCreateResponse(purchaseRepository.save(purchase));
     }
 
     @Override

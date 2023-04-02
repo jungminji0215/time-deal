@@ -3,15 +3,17 @@ package com.example.timedeal.purchase.domain;
 import com.example.timedeal.product.domain.Product;
 import com.example.timedeal.purchase.dto.response.CreatePurchaseResponse;
 import com.example.timedeal.user.domain.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-// todo 클래스명 의미있게 변경 UserProduct -> purchase
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
-@Table(name = "purchase")
 @Entity
 public class Purchase {
     @Id
@@ -27,18 +29,10 @@ public class Purchase {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    public static Purchase createPurchase(User user, Product product) {
-        Purchase purchase = new Purchase();
-        purchase.user = user;
-        purchase.product = product;
-        product.addPurchase(purchase);
-        return purchase;
-    }
-
-    public CreatePurchaseResponse toResponse() {
-        return CreatePurchaseResponse.builder()
-                .userId(user.getId())
-                .productId(product.getId())
+    public static Purchase of(User user, Product product) {
+        return Purchase.builder()
+                .user(user)
+                .product(product)
                 .build();
     }
 }

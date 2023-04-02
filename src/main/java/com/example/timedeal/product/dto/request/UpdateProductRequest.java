@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateProductRequest {
-    String name;
+    private String name;
 
-    int price;
-
-    int stockQuantity;
+    private int price;
 }

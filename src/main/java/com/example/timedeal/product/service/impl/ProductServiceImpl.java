@@ -2,17 +2,15 @@ package com.example.timedeal.product.service.impl;
 
 import com.example.timedeal.product.domain.Product;
 import com.example.timedeal.product.domain.ProductRepository;
-import com.example.timedeal.timedeal.domain.ProductSale;
 import com.example.timedeal.product.dto.request.CreateProductRequest;
 import com.example.timedeal.product.dto.request.UpdateProductRequest;
 import com.example.timedeal.product.dto.response.CreateProductResponse;
 import com.example.timedeal.product.dto.response.DeleteProductResponse;
 import com.example.timedeal.product.dto.response.GetProductResponse;
 import com.example.timedeal.product.dto.response.UpdateProductResponse;
+import com.example.timedeal.product.service.ProductService;
 import com.example.timedeal.utils.exception.ErrorCode;
 import com.example.timedeal.utils.exception.TimeDealException;
-import com.example.timedeal.product.service.ProductService;
-import com.example.timedeal.utils.DiscountProduct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,9 +44,6 @@ public class ProductServiceImpl implements ProductService {
     public CreateProductResponse create(CreateProductRequest request) {
         Product product = Product.of(request);
 
-        int discountPrice = DiscountProduct.calculateProductSale(request.getPrice(), request.getProductSale().getDiscount());
-        product.addSaleInfo(ProductSale.of(request.getProductSale(), discountPrice));
-
         return CreateProductResponse.toCreateResponse(productRepository.save(product));
     }
 
@@ -72,8 +67,4 @@ public class ProductServiceImpl implements ProductService {
         return DeleteProductResponse.toDeleteResponse(product);
 
     }
-
-
-
-
 }

@@ -15,17 +15,14 @@ public class UpdateProductResponse {
 
     private int price;
 
-    private int stockQuantity;
-
-    private CreateProductSaleResponse saleInfo;
+    private boolean isDeleted;
 
     public static UpdateProductResponse toUpdateResponse(Product product){
         return UpdateProductResponse.builder()
                 .id(product.getId())
                 .name(product.getName())
                 .price(product.getPrice())
-                .stockQuantity(product.getStockQuantity())
-                .saleInfo(product.getProductSale().toResponse())
+                .isDeleted(product.isDeleted())
                 .build();
     }
 }
