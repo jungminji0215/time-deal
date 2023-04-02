@@ -17,8 +17,6 @@ public class GetProductResponse {
 
     private int price;
 
-    private int stockQuantity;
-
     private LocalDateTime registeredAt;
 
     private LocalDateTime updatedAt;
@@ -27,18 +25,15 @@ public class GetProductResponse {
 
     private boolean isDeleted;
 
-    private CreateProductSaleResponse saleInfo;
-
     public static GetProductResponse toGetResponse(Product product){
         return GetProductResponse.builder()
                 .id(product.getId())
                 .name(product.getName())
                 .price(product.getPrice())
-                .stockQuantity(product.getStockQuantity())
                 .registeredAt(product.getRegisteredAt())
                 .updatedAt(product.getUpdatedAt())
                 .deletedAt(product.getDeletedAt())
-                .saleInfo(product.getProductSale().toResponse())
+                .isDeleted(product.isDeleted())
                 .build();
     }
 }

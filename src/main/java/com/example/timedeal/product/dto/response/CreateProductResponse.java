@@ -17,26 +17,23 @@ public class CreateProductResponse {
 
     private int price;
 
-    private int stockQuantity;
-
     private LocalDateTime registeredAt;
 
     private LocalDateTime updatedAt;
 
     private LocalDateTime deletedAt;
 
-    private CreateProductSaleResponse saleInfo;
+    private boolean isDeleted;
 
     public static CreateProductResponse toCreateResponse(Product product){
         return CreateProductResponse.builder()
                 .id(product.getId())
                 .name(product.getName())
                 .price(product.getPrice())
-                .stockQuantity(product.getStockQuantity())
                 .registeredAt(product.getRegisteredAt())
                 .updatedAt(product.getUpdatedAt())
                 .deletedAt(product.getDeletedAt())
-                .saleInfo(product.getProductSale().toResponse())
+                .isDeleted(product.isDeleted())
                 .build();
     }
 }

@@ -1,6 +1,6 @@
 package com.example.timedeal.product.domain;
 
-import com.example.timedeal.timedeal.domain.ProductSale;
+import com.example.timedeal.timedeal.domain.TimeDeal;
 import com.example.timedeal.purchase.domain.Purchase;
 import com.example.timedeal.product.dto.request.CreateProductRequest;
 import com.example.timedeal.product.dto.request.UpdateProductRequest;
@@ -30,8 +30,6 @@ public class Product {
 
     private int price;
 
-    private int stockQuantity;
-
     @ColumnDefault("false")
     boolean isDeleted;
 
@@ -45,9 +43,8 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<Purchase> purchases = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_sale_id")
-    private ProductSale productSale;
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    private List<TimeDeal> timeDeal = new ArrayList<>();
 
     @PrePersist
     void registeredAt(){
@@ -58,14 +55,12 @@ public class Product {
         return Product.builder()
                 .name(request.getName())
                 .price(request.getPrice())
-                .stockQuantity(request.getStockQuantity())
                 .build();
     }
 
     public void update(UpdateProductRequest request) {
         this.name = request.getName();
         this.price = request.getPrice();
-        this.stockQuantity = request.getStockQuantity();
         this.updatedAt = LocalDateTime.now();
     }
 
@@ -74,25 +69,12 @@ public class Product {
         this.deletedAt = LocalDateTime.now();
     }
 
-    public void checkStockQuantity() {
-        if(this.stockQuantity == 0){
-            throw new IllegalArgumentException("재고가 없습니다.");
-        }
-        this.stockQuantity--;
-    }
-
     public void addPurchase(Purchase purchase) {
         this.purchases.add(purchase);
     }
 
-    public void addSaleInfo(ProductSale productSale) {
-        this.productSale = productSale;
-        productSale.addProduct(this);
-    }
-
-    public void checkTime() {
-        if(productSale.getFinishedAt().isBefore(LocalDateTime.now())){
-            throw new IllegalArgumentException("특가시간이 지났습니다.");
-        }
+    public void addTimeDeal(TimeDeal timeDeal) {
+        this.timeDeal.add(timeDeal);
+        timeDeal.addProduct(this);
     }
 }

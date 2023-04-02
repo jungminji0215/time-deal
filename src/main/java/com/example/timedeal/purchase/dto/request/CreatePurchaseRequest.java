@@ -5,4 +5,6 @@ import lombok.Data;
 @Data
 public class CreatePurchaseRequest {
     private Long productId;
+
+    private int cnt;
 }
