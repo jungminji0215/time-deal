@@ -83,7 +83,7 @@ public class Product {
 
 
     public void decreaseStock(int cnt){
-        if(this.stock <= 0){
+        if(this.stock - cnt <= 0){
             throw new TimeDealException(ErrorCode.SOLD_OUT, "품절");
         }
 

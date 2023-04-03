@@ -36,7 +36,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         User user = userRepository.findById(request.getUserId())
                 .orElseThrow(()-> new TimeDealException(ErrorCode.USER_NOT_FOUNDED, "유저 아이디 : " + request.getUserId()));
 
-        Product product = productRepository.findById(request.getProductId())
+        Product product = productRepository.findByIdWithLock(request.getProductId())
                 .orElseThrow(()-> new TimeDealException(ErrorCode.PRODUCT_NOT_FOUND, "상품 아이디 : " + request.getProductId()));
 
         TimeDeal timeDeal = timeDealRepository.findByProductId(request.getProductId())
