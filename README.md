@@ -1,17 +1,7 @@
 # ⏰ Time Deal 
 
-# 목차
-- [사용 기술](#사용-기술)
-- [개발 히스토리](#개발-히스토리)
-- [프로젝트 설명](#프로젝트-설명)
-- [설계](#설계)
-- [API](#API)
-- [브랜치 전략](#브랜치-전략)
-- [배포 해보기](#배포-해보기)
 
----
-
-## 사용 기술
+## 1️⃣ 사용 기술
 
 <a><img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=flat-square&logo=SpringBoot&logoColor=white"/></a>
 <a><img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=Java&logo&Color=white"/></a>
@@ -20,13 +10,15 @@
 <a><img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=Git&logoColor=white"/></a>
 <a><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/></a>
 
-## 개발 히스토리
+## 2️⃣ 개발 히스토리
 
 블로그에 개발 히스토리를 정리하였습니다.
 
 👉🏻 [블로그 링크](https://wjdalswl0215.tistory.com/category/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%ED%83%80%EC%9E%84%EB%94%9C%20%EC%84%9C%EB%B2%84%20%EA%B5%AC%EC%B6%95)
 
-## 프로젝트 설명
+## 3️⃣ 프로젝트 설명
+
+- 정해진 기간에만 상품을 구매할 수 있는 서버 구축
 
 11번가가 제공하는 '쇼킹딜' 서비스는 특정 상품에 대해서 특정 시간 동안만 특가 가격으로 상품을 구매할 수 있는 서비스이다. 이와 같은 타임딜 REST API 서버를 구축해 보려고 한다.
 
@@ -34,17 +26,14 @@
 
 [11번가 쇼킹딜 서비스](https://deal.11st.co.kr/browsing/DealAction.tmall?method=getTimeDeal)
 
-### 프로젝트 목적
-
-🚧 TODO
-
-### 기능
+## 4️⃣ 기능 
 
 - [회원] 가입/탈퇴/조회
 - [상품] 등록/수정/삭제/목록/상세
 - 구매하기
 
-### 요구사항
+---
+
 - 각 상품마다 '구매 가능한 시간'이 있다.
     - '구매 가능 시간' 전에는 구매가 불가능하다. 
     - '구매 가능 시간'이 도래하면 구매가 가능하다.
@@ -57,19 +46,18 @@
 - 상품을 구매한 사람 수와 상품의 재고수량이 일치해야 한다.
 - 구매하기 API는 구매 성공/실패만 구분해도 된다.
 
-## 설계
+## 5️⃣ 설계
 
 ### ERD
 
-![time deal](https://user-images.githubusercontent.com/83000829/228023408-00c01d4b-ff10-4322-abf7-781f27020fa4.png)
-
+<img width="973" alt="스크린샷 2023-04-04 오전 2 21 01" src="https://user-images.githubusercontent.com/83000829/229582021-753a8fc6-e317-443e-81c1-c08c7da60112.png">
 
 ### Entity
 
-![스크린샷 2023-03-28 오전 2 44 51](https://user-images.githubusercontent.com/83000829/228023594-a59c57f3-cea3-4bd0-8609-867092b5a1a0.png)
+<img width="705" alt="스크린샷 2023-04-04 오전 2 22 02" src="https://user-images.githubusercontent.com/83000829/229582238-bfe06a83-6421-4ad4-8fc9-40daf0460096.png">
 
 
-## API
+## 6️⃣ API
 
 ### 회원
 
@@ -100,29 +88,15 @@
 | ✅ | [구매] 회원별 구매 상품 리스트   | GET        | /purchase/{userId}/user       |
 | ✅ | [구매] 상품별 구매 유저 리스트   | GET         | /purchase/{productId}/product |
 
+### 타임딜 
+
+|   | 기능                   | HTTP Method | HTTP Path                   |
+|---|----------------------|-------------|-----------------------------|
+| ✅ | [타임딜] 타임딜 등록        | POST        | /time-deal                     |
+
+
 ---
 
-|     | 기능            |  
-|-----|---------------| 
-| 진행중 | 테스트코드         | 
-| ✅ | error handler | 
-|     | API 문서        |  
-|     | CI/CD 구축      |  
-|     | 성능 테스트        |  
-
-
-## 브랜치 전략
-
-기능 개발을 체계적으로 해보고싶어서 브랜치 전략 사용
-
-<img width="528" alt="스크린샷 2023-03-16 오전 1 31 25" src="https://user-images.githubusercontent.com/83000829/225377053-2a378f57-aff1-4f04-a2eb-a145877816a3.png">
-
-- github 브랜치 전략을 사용하여 프로젝트 진행
-  - feature : [주요 기능](https://github.com/jungminji0215/time-deal/issues)에 대한 작업을 하는 브랜치
-    - 개발이 완료되면 PR을 올리고, main에 머지
-  - main : 개발이 완료되면 feature 브랜치를 머지
-
-
-## 배포 해보기
+## 7️⃣ 배포 해보기
 
 🚧 TODO
