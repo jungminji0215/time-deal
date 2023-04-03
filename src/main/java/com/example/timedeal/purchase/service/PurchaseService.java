@@ -9,7 +9,7 @@ import com.example.timedeal.purchase.dto.response.GetPurchaseUserResponse;
 import java.util.List;
 
 public interface PurchaseService {
-    CreatePurchaseResponse purchase(CreatePurchaseRequest request, String requestHeader);
+    CreatePurchaseResponse purchase(CreatePurchaseRequest request);
 
     // 유저별 상품 리스트
     List<GetPurchaseProductResponse> productListByUser(Long userId);

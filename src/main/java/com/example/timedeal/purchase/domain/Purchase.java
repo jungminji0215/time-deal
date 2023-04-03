@@ -1,7 +1,7 @@
 package com.example.timedeal.purchase.domain;
 
 import com.example.timedeal.product.domain.Product;
-import com.example.timedeal.purchase.dto.response.CreatePurchaseResponse;
+import com.example.timedeal.timedeal.domain.TimeDeal;
 import com.example.timedeal.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,7 +29,11 @@ public class Purchase {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    public static Purchase of(User user, Product product) {
+    public static Purchase of(User user, Product product, TimeDeal timeDeal, int cnt) {
+        timeDeal.checkTime();
+
+        product.decreaseStock(cnt);
+
         return Purchase.builder()
                 .user(user)
                 .product(product)

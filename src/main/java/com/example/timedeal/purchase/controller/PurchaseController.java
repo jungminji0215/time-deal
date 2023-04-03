@@ -19,10 +19,9 @@ public class PurchaseController {
 
     @PostMapping
     public ApiResponse<CreatePurchaseResponse> createPurchase(
-            @RequestBody CreatePurchaseRequest request,
-            @RequestHeader("Authentication") String requestHeader
+            @RequestBody CreatePurchaseRequest request
     ){
-        return ApiResponse.success(purchaseService.purchase(request, requestHeader));
+        return ApiResponse.success(purchaseService.purchase(request));
     }
 
     @GetMapping("/{userId}/user")

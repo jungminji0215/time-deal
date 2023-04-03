@@ -17,6 +17,8 @@ public class GetProductResponse {
 
     private int price;
 
+    private int stock;
+
     private LocalDateTime registeredAt;
 
     private LocalDateTime updatedAt;
@@ -30,6 +32,7 @@ public class GetProductResponse {
                 .id(product.getId())
                 .name(product.getName())
                 .price(product.getPrice())
+                .stock(product.getStock())
                 .registeredAt(product.getRegisteredAt())
                 .updatedAt(product.getUpdatedAt())
                 .deletedAt(product.getDeletedAt())

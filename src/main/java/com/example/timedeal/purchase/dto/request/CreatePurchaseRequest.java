@@ -6,5 +6,8 @@ import lombok.Data;
 public class CreatePurchaseRequest {
     private Long productId;
 
+    // 임시
+    private Long userId;
+
     private int cnt;
 }

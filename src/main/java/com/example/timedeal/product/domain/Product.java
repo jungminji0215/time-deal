@@ -4,6 +4,8 @@ import com.example.timedeal.timedeal.domain.TimeDeal;
 import com.example.timedeal.purchase.domain.Purchase;
 import com.example.timedeal.product.dto.request.CreateProductRequest;
 import com.example.timedeal.product.dto.request.UpdateProductRequest;
+import com.example.timedeal.utils.exception.ErrorCode;
+import com.example.timedeal.utils.exception.TimeDealException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,6 +32,8 @@ public class Product {
 
     private int price;
 
+    private int stock;
+
     @ColumnDefault("false")
     boolean isDeleted;
 
@@ -40,6 +44,7 @@ public class Product {
     // soft delete
     private LocalDateTime deletedAt;
 
+    @Builder.Default
     @OneToMany(mappedBy = "product")
     private List<Purchase> purchases = new ArrayList<>();
 
@@ -55,12 +60,14 @@ public class Product {
         return Product.builder()
                 .name(request.getName())
                 .price(request.getPrice())
+                .stock(request.getStock())
                 .build();
     }
 
     public void update(UpdateProductRequest request) {
         this.name = request.getName();
         this.price = request.getPrice();
+        this.stock = request.getStock();
         this.updatedAt = LocalDateTime.now();
     }
 
@@ -69,12 +76,17 @@ public class Product {
         this.deletedAt = LocalDateTime.now();
     }
 
-    public void addPurchase(Purchase purchase) {
-        this.purchases.add(purchase);
-    }
-
     public void addTimeDeal(TimeDeal timeDeal) {
         this.timeDeal.add(timeDeal);
         timeDeal.addProduct(this);
+    }
+
+
+    public void decreaseStock(int cnt){
+        if(this.stock - cnt <= 0){
+            throw new TimeDealException(ErrorCode.SOLD_OUT, "품절");
+        }
+
+        this.stock -= cnt;
     }
 }

@@ -32,24 +32,17 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Override
     @Transactional
-    public CreatePurchaseResponse purchase(CreatePurchaseRequest request, String requestHeader) {
-        Long userId = (long) Integer.parseInt(requestHeader.split(" ")[1]);
+    public CreatePurchaseResponse purchase(CreatePurchaseRequest request) {
+        User user = userRepository.findById(request.getUserId())
+                .orElseThrow(()-> new TimeDealException(ErrorCode.USER_NOT_FOUNDED, "유저 아이디 : " + request.getUserId()));
 
-        User user = userRepository.findById(userId)
-                .orElseThrow(()-> new TimeDealException(ErrorCode.USER_NOT_FOUNDED, "유저 아이디 : " + userId));
-
-        Product product = productRepository.findById(request.getProductId())
+        Product product = productRepository.findByIdWithLock(request.getProductId())
                 .orElseThrow(()-> new TimeDealException(ErrorCode.PRODUCT_NOT_FOUND, "상품 아이디 : " + request.getProductId()));
 
         TimeDeal timeDeal = timeDealRepository.findByProductId(request.getProductId())
                 .orElseThrow(()-> new TimeDealException(ErrorCode.TIME_DEAL_NOT_FOUND, "진행중인 타임딜이 상품이 아닙니다."));
 
-
-        timeDeal.checkTime();
-
-        timeDeal.decreaseStock(request.getCnt());
-
-        Purchase purchase = Purchase.of(user, product);
+        Purchase purchase = Purchase.of(user, product, timeDeal, request.getCnt());
 
         return CreatePurchaseResponse.toCreateResponse(purchaseRepository.save(purchase));
     }

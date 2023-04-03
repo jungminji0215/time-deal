@@ -10,5 +10,7 @@ import lombok.NoArgsConstructor;
 public class UpdateProductRequest {
     private String name;
 
+    private int stock;
+
     private int price;
 }
