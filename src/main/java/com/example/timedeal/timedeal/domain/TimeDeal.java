@@ -27,8 +27,6 @@ public class TimeDeal {
 
     private String name;
 
-    private int stock;
-
     private LocalDateTime startedAt;
 
     private LocalDateTime finishedAt;
@@ -51,7 +49,6 @@ public class TimeDeal {
     ){
         return TimeDeal.builder()
                 .name(request.getName())
-                .stock(request.getStock())
                 .startedAt(request.getStartedAt())
                 .finishedAt(request.getFinishedAt())
                 .discount(request.getDiscount())
@@ -60,7 +57,6 @@ public class TimeDeal {
 
     public void update(UpdateTimeDealRequest request){
         this.name = request.getName();
-        this.stock = request.getStock();
         this.startedAt = request.getStartedAt();
         this.finishedAt = request.getFinishedAt();
         this.discount = request.getDiscount();
@@ -80,11 +76,4 @@ public class TimeDeal {
         }
     }
 
-    public void decreaseStock(int cnt){
-        if(this.stock <= 0){
-            throw new  TimeDealException(ErrorCode.SOLD_OUT, "품절");
-        }
-
-        this.stock -= cnt;
-    }
 }

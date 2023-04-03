@@ -10,8 +10,6 @@ public class CreateTimeDealRequest {
 
     private String name;
 
-    private int stock;
-
     private int discount;
 
     private LocalDateTime startedAt;

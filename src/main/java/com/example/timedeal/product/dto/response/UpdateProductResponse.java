@@ -15,6 +15,8 @@ public class UpdateProductResponse {
 
     private int price;
 
+    private int stock;
+
     private boolean isDeleted;
 
     public static UpdateProductResponse toUpdateResponse(Product product){
@@ -22,6 +24,7 @@ public class UpdateProductResponse {
                 .id(product.getId())
                 .name(product.getName())
                 .price(product.getPrice())
+                .stock(product.getStock())
                 .isDeleted(product.isDeleted())
                 .build();
     }

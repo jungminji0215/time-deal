@@ -32,7 +32,6 @@ public class FinishTimeDealResponse {
                 .id(timeDeal.getId())
                 .productId(timeDeal.getProduct().getId())
                 .name(timeDeal.getName())
-                .stock(timeDeal.getStock())
                 .discount(timeDeal.getDiscount())
                 .startedAt(timeDeal.getStartedAt())
                 .finishedAt(timeDeal.getFinishedAt())

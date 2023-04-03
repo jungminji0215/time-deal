@@ -19,6 +19,4 @@ public interface ProductService {
     UpdateProductResponse update(UpdateProductRequest request, Long productId);
 
     DeleteProductResponse delete(Long productId);
-
-
 }
