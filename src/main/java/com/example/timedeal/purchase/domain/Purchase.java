@@ -29,9 +29,7 @@ public class Purchase {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    public static Purchase of(User user, Product product, TimeDeal timeDeal, int cnt) {
-        timeDeal.checkTime();
-
+    public static Purchase of(User user, Product product, int cnt) {
         product.decreaseStock(cnt);
 
         return Purchase.builder()

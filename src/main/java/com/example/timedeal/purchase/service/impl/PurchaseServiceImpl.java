@@ -41,8 +41,9 @@ public class PurchaseServiceImpl implements PurchaseService {
 
         TimeDeal timeDeal = timeDealRepository.findByProductId(request.getProductId())
                 .orElseThrow(()-> new TimeDealException(ErrorCode.TIME_DEAL_NOT_FOUND, "진행중인 타임딜이 상품이 아닙니다."));
+        timeDeal.checkTime();
 
-        Purchase purchase = Purchase.of(user, product, timeDeal, request.getCnt());
+        Purchase purchase = Purchase.of(user, product, request.getCnt());
 
         return CreatePurchaseResponse.toCreateResponse(purchaseRepository.save(purchase));
     }
