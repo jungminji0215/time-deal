@@ -27,11 +27,12 @@ jobs: # jobs에 이제 실행할 동작들을 정의해준다.
         run: chmod +x ./gradlew
         shell: bash # 돌아가는 환경을 bash shell로 하겠다.
 
-      - name: Build with Gradle
-#        run: ./gradlew build  # 실제 빌드
+#      - name: Build with Gradle
+#        run: ./gradlew build  # 실제 빌드 하기
 #        shell: bash
       - name: Build with Gradle
         run: ./gradlew build --exclude-task test
+        shell: bash
 
       - name: Make zip file
         run: zip -r ./$GITHUB_SHA . # 결과된 파일을 하나의 zip 파일로 압축해서 올리자. GITHUB_SHA : 중복되지 않는 값을 출력해준다.
