@@ -46,7 +46,11 @@
 - 상품을 구매한 사람 수와 상품의 재고수량이 일치해야 한다.
 - 구매하기 API는 구매 성공/실패만 구분해도 된다.
 
-## 5️⃣ 설계
+## 5️⃣ CI CD
+
+<img width="896" alt="스크린샷 2023-04-05 오후 10 26 29" src="https://user-images.githubusercontent.com/83000829/230094856-7e2380fc-04e9-4c5b-889a-5b5ceedc9364.png">
+
+## 6️⃣ 설계
 
 ### ERD
 
@@ -57,7 +61,7 @@
 <img width="705" alt="스크린샷 2023-04-04 오전 2 22 02" src="https://user-images.githubusercontent.com/83000829/229582238-bfe06a83-6421-4ad4-8fc9-40daf0460096.png">
 
 
-## 6️⃣ API
+## 7️⃣ API
 
 ### 회원
 
@@ -95,8 +99,3 @@
 | ✅ | [타임딜] 타임딜 등록        | POST        | /time-deal                     |
 
 
----
-
-## 7️⃣ 배포 해보기
-
-🚧 TODO
